@@ -57,7 +57,7 @@ function appendCity(city) {
                 $('ul#cities-list').empty();
                 
                 localStorage.setItem("cityKey", city.Key);
-                weatherDetails(city.Key);
+                weatherDetails(city.key);
             })
     );
 }
