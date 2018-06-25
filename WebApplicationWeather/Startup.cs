@@ -3,9 +3,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Weather.Data;
-using Weather.Data.Interfaces;
-using Weather.Data.Models;
 
 namespace WebApplicationWeather
 {
@@ -21,12 +18,9 @@ namespace WebApplicationWeather
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<WeatherDbContext>(options => 
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-
-                services.AddScoped<ICity, City>();
-
             services.AddMvc();
+            services.AddSession();
+            services.AddMemoryCache();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -36,8 +30,6 @@ namespace WebApplicationWeather
             {
                 app.UseDeveloperExceptionPage();
                 app.UseBrowserLink();
-
-                //DbContextExtension.Seed(app);
             }
             else
             {
