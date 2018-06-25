@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace WebApplicationWeather.Models
 {
-    public class MetricModel
+    public class MetricDto
     {
         public string Unit { get; set; }
 

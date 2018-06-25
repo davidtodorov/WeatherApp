@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace WebApplicationWeather.Models
 {
-    public class CountryModel
+    public class TemperatureDto
     {
-        public string LocalizedName { get; set; }
+        public MetricDto Metric { get; set; }
     }
 }

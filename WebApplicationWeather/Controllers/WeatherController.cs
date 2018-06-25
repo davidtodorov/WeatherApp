@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -19,7 +18,7 @@ namespace WebApplicationWeather.Controllers
 
             var result = DownloadPageAsync(page).Result;
 
-            var cities = JsonConvert.DeserializeObject<List<CityModel>>(result);
+            var cities = JsonConvert.DeserializeObject<List<CityDto>>(result);
             return this.Json(cities);
         }
 
@@ -28,7 +27,7 @@ namespace WebApplicationWeather.Controllers
             var page = "http://dataservice.accuweather.com//currentconditions/v1/" + city.CityId +"?apikey=" + apikey + "&details=true";
 
             var result = DownloadPageAsync(page).Result;
-            var weather = JsonConvert.DeserializeObject<List<WeatherModel>>(result);
+            var weather = JsonConvert.DeserializeObject<List<WeatherDto>>(result);
             return this.Json(weather);
         }
 

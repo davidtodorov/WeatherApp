@@ -1,11 +1,11 @@
 ﻿namespace WebApplicationWeather.Models
 {
-    public class CityModel
+    public class CityDto
     {
         public string Key { get; set; }
 
         public string LocalizedName { get; set; }
 
-        public CountryModel Country { get; set; }
+        public CountryDto Country { get; set; }
     }
 }
