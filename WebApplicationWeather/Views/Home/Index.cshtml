@@ -1,8 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-@using WebApplicationWeather
-@model WebApplicationWeather.Models.CityViewModel
+@model CityViewModel
 
 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 <div class="row">
@@ -16,6 +15,7 @@
     </div>
 
     <div class="form-group col-md-4" style="margin-top: 45px;">
+        <label>Refresh time</label>
         <select class="btn btn-default" id="selectRefreshTime">
             <option value="900000"> 15 min </option>
             <option value="1800000"> 30 min </option>
@@ -24,20 +24,20 @@
     </div>
 </div>
 
-<ul id="cities-list"></ul>
+<ul id="cities-list" style="list-style-type: none; width: 300px;"></ul>
 
 <table class="table table-bordered" id="weatherTable" style="display:none">
     <thead>
-        <tr>
-            <th class="col-md-4" id="weatherForCity"></th>
-            <th class="col-md-4">Tempreture</th>
-            <th class="col-md-4">Humidity</th>
-        </tr>
+    <tr>
+        <th class="col-md-4" id="weatherForCity"></th>
+        <th class="col-md-4">Tempreture</th>
+        <th class="col-md-4">Humidity</th>
+    </tr>
     </thead>
 
     <tbody></tbody>
 </table>
 
 @section Scripts {
-    <script src="~/js/weather2.js"></script>
+    <script src="~/js/weather.js"></script>
 }
