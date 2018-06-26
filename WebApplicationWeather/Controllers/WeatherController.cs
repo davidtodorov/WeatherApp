@@ -19,18 +19,20 @@ namespace WebApplicationWeather.Controllers
 
         public IActionResult Search(CityViewModel city)
         {
-            var result = this.weatherService.GetSearchCityResponse(city.Name);
-            var cities = JsonConvert.DeserializeObject<List<CityDto>>(result);
-
+            var cities = this.weatherService.GetSearchCityResult(city.Name);
             return this.Json(cities);
         }
 
         public IActionResult City(CityViewModel city)
         {
-            var result = this.weatherService.GetWeatherDetails(city.CityId);
-            var weather = JsonConvert.DeserializeObject<List<WeatherDto>>(result);
-
+            var weather = this.weatherService.GetWeatherDetails(city.CityId);
             return this.Json(weather);
+        }
+
+        public IActionResult DailyForecast(CityViewModel city)
+        {
+            var forecast = this.weatherService.GetDailyForecast(city.CityId);
+            return this.Json(forecast);
         }
     }
 }

@@ -1,26 +1,44 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Weather.Interfaces;
+using Weather.Interfaces.DTOs;
 
 namespace Weather.Services
 {
     public class WeatherService : IWeatherService
     {
-        private const string apikey = "fGMDhJfXeGJBUgpqLTEoCgFn8jUAD2z8";
+        private const string apikey = "4LoYKmY4ze2F6ivayuqF73NtB5TmaBef";
 
-        public string GetSearchCityResponse(string cityName)
+        public IList<CityDto> GetSearchCityResult(string cityName)
         {
             var page = "http://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=" + apikey + "&q=" + cityName;
-            return  DownloadPageAsync(page).Result;
+            var result = DownloadPageAsync(page).Result;
+            var cities = JsonConvert.DeserializeObject<List<CityDto>>(result);
+
+            return cities;
         }
 
-        public string GetWeatherDetails(string cityId)
+        public IList<WeatherDto> GetWeatherDetails(string cityId)
         {
             var page = "http://dataservice.accuweather.com//currentconditions/v1/" + cityId + "?apikey=" + apikey + "&details=true";
-            return DownloadPageAsync(page).Result;
+            var result =  DownloadPageAsync(page).Result;
+            var weather = JsonConvert.DeserializeObject<List<WeatherDto>>(result);
+
+            return weather;
+        }
+
+        public ForecastDto GetDailyForecast(string cityId)
+        {
+            var page = "http://dataservice.accuweather.com/forecasts/v1/daily/1day/" + cityId + "?apikey=" + apikey + "&metric=true";
+            var result = DownloadPageAsync(page).Result;
+            var forecast = JsonConvert.DeserializeObject<ForecastDto>(result);
+
+            return forecast;
         }
 
         private static async Task<string> DownloadPageAsync(string page)
@@ -32,6 +50,7 @@ namespace Weather.Services
                     var result = await response.Content.ReadAsStringAsync();
                     if (result == "")
                     {
+                        //empty json for deserialize when there is no city/ies found
                         result = "[]";
                     }
                     return result;

@@ -1,4 +1,4 @@
-﻿namespace WebApplicationWeather.Models
+﻿namespace Weather.Interfaces.DTOs
 {
     public class WeatherDto
     { 
