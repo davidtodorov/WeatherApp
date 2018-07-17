@@ -12,7 +12,7 @@ namespace Weather.Services
 {
     public class WeatherService : IWeatherService
     {
-        private const string apikey = "4LoYKmY4ze2F6ivayuqF73NtB5TmaBef";
+        private const string apikey = "cxBNFzhzGrxxeK5LXH7m1k0zGjb5TD7b";
 
         public IList<CityDto> GetSearchCityResult(string cityName)
         {
